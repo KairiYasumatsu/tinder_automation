@@ -96,7 +96,7 @@ class tinder:
 
     def autoMessage(self, login):
         login()
-        i = 2
+        i = 0
 
         # 直近のマッチを50件取得
         while i < 50:
@@ -128,7 +128,9 @@ class tinder:
             self.driver.implicitly_wait(10)
             getSendButton = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div[1]/div/div/div[3]/form/button")
             getSendButton.click()
-            print("メッセージ送信完了")
+
+            i += 1
+            print(i, "件メッセージ送信完了")
 
             # ２秒待ってみる 
             sleep(2)
@@ -137,4 +139,3 @@ class tinder:
             backMatchedList = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/aside/nav/div/div/div/div[1]/div/div[1]/button")
             backMatchedList.click()
 
-            i += 1
