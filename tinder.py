@@ -100,8 +100,10 @@ class tinder:
 
         # 直近のマッチを50件取得
         while i < 50:
+            # 2秒まっってみる
+            sleep(2)
             # 次のマッチを取得
-            matchedXpath = "/html/body/div[1]/div/div[1]/div/aside/nav/div/div/div/div[2]/div[1]/div[1]/div[" + str(i) + "]/a"
+            matchedXpath = "/html/body/div[1]/div/div[1]/div/aside/nav/div/div/div/div[2]/div[1]/div[1]/div[2]/a"
             self.driver.implicitly_wait(10)
             getMatched = self.driver.find_element_by_xpath(matchedXpath)
             getMatched.click()
@@ -122,9 +124,17 @@ class tinder:
             getTextArea.send_keys(" ")
             print("メッセージセット完了")
 
+            # 送信ボタン押下
             self.driver.implicitly_wait(10)
             getSendButton = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div[1]/div/div/div[3]/form/button")
             getSendButton.click()
             print("メッセージ送信完了")
+
+            # ２秒待ってみる 
+            sleep(2)
+            # 4枚目からメッセージリストに画面遷移してしまうので、ここで毎回明示的にマッチリストに戻る
+            self.driver.implicitly_wait(10)
+            backMatchedList = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/aside/nav/div/div/div/div[1]/div/div[1]/button")
+            backMatchedList.click()
 
             i += 1
